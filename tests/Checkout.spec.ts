@@ -3,6 +3,7 @@ import { LoginPage } from '../object/LoginPage';
 import { InventoryPage } from '../object/InventoryPage';
 import { CheckoutPage } from '../object/Checkout';
 import { CheckoutData} from '../Data/UserData';
+import { UserData } from '../Data/UserData';
 
 test.describe('SauceDemo Checkout', () => {
     let loginPage: LoginPage;
@@ -14,7 +15,7 @@ test.describe('SauceDemo Checkout', () => {
     inventoryPage = new InventoryPage(page); 
     checkoutPage = new CheckoutPage(page);
     await loginPage.goto();
-    await loginPage.login('standard_user', 'secret_sauce');
+    await loginPage.login(UserData.validUser.username, UserData.validUser.password);
       });
 
     test('Checkout dengan data valid', async () => {

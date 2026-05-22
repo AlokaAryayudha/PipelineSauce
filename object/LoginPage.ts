@@ -29,4 +29,12 @@ export class LoginPage {
   async verifyLoginFailed() {
     await expect(this.page.locator('[data-test="error"]')).toBeVisible();
   }
+
+  async MenuAkun() {
+    await this.page.locator('#react-burger-menu-btn').click();
+  }
+  async Logout() {
+    await this.page.locator('#logout_sidebar_link').click();
+  } 
+  
 }

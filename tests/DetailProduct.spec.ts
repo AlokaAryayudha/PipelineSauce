@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 import { LoginPage } from '../object/LoginPage';
 import { InventoryPage } from '../object/InventoryPage';
 import { ProductPage } from '../object/ProductPage';
+import { UserData } from '../Data/UserData';
 
 test.describe('SauceDemo Detail Produk', () => {
     let loginPage: LoginPage;
@@ -13,7 +14,7 @@ test.describe('SauceDemo Detail Produk', () => {
     inventoryPage = new InventoryPage(page);
     productPage = new ProductPage(page);
     await loginPage.goto();
-    await loginPage.login('standard_user', 'secret_sauce');
+    await loginPage.login(UserData.validUser.username, UserData.validUser.password);
     await loginPage.verifyLoginSuccess();
   });
 

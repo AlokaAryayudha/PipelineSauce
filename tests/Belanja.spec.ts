@@ -1,6 +1,8 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../object/LoginPage';
 import { InventoryPage } from '../object/InventoryPage';
+import { UserData } from '../Data/UserData';
+
 
 
 test.describe('SauceDemo tambah keranjang', () => {
@@ -11,7 +13,7 @@ test.describe('SauceDemo tambah keranjang', () => {
     loginPage = new LoginPage(page);
     inventoryPage = new InventoryPage(page);
     await loginPage.goto();
-    await loginPage.login('standard_user', 'secret_sauce');
+    await loginPage.login(UserData.validUser.username, UserData.validUser.password);
     await loginPage.verifyLoginSuccess();
   });
 
