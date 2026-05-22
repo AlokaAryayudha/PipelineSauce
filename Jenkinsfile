@@ -22,6 +22,15 @@ pipeline {
     post {
         always {
             echo 'Pipeline selesai!'
+            // Publish HTML report
+            publishHTML([
+                allowMissing: false,
+                alwaysLinkToLastBuild: true,
+                keepAll: true,
+                reportDir: 'playwright-report',
+                reportFiles: 'index.html',
+                reportName: 'Playwright Test Report'
+            ])
         }
         success {
             echo 'Semua test PASSED!'
