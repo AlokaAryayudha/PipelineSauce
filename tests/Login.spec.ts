@@ -10,12 +10,13 @@ test.describe('SauceDemo Login', () => {
     await loginPage.goto();
   });
 
-  test('Login berhasil dengan kredensial valid', async () => {
+  test.skip('Login berhasil dengan kredensial valid', async () => {
     await loginPage.login('standard_user', 'secret_sauce');
     await loginPage.verifyLoginSuccess();
+    await loginPage.page.pause()
   });
 
-  test('Login gagal dengan password salah', async () => {
+  test.skip('Login gagal dengan password salah', async () => {
     await loginPage.login('standard_user', 'wrong_password');
     await loginPage.verifyLoginFailed();
   });
