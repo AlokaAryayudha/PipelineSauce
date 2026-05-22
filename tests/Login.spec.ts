@@ -10,7 +10,7 @@ test.describe('SauceDemo Login', () => {
     await loginPage.goto();
   });
 
-  test('Login berhasil dengan kredensial valid', async () => {
+  test.only('Login berhasil dengan kredensial valid', async () => {
     await loginPage.login('standard_user', 'secret_sauce');
     await loginPage.verifyLoginSuccess();
   });
