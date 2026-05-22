@@ -26,7 +26,7 @@ test.describe('SauceDemo Detail Produk', () => {
 
   });   
 
-  test.only('Buka detail produk Backpack dan memasukan kekeranjang', async () => {
+  test('Buka detail produk Backpack dan memasukan kekeranjang', async () => {
     await productPage.bukaDetailProduk('backpack');
     // await expect(productPage.page.locator('.inventory_details_name')).toHaveText('Sauce Labs Backpack');
         console.log('Detail produk Backpack berhasil dibuka');
@@ -37,6 +37,6 @@ test.describe('SauceDemo Detail Produk', () => {
 
   });   
 
-  
+
 
   });
