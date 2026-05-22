@@ -16,7 +16,7 @@ test.describe('SauceDemo Login', () => {
     await loginPage.page.pause()
   });
 
-  test.skip('Login gagal dengan password salah', async () => {
+  test('Login gagal dengan password salah', async () => {
     await loginPage.login('standard_user', 'wrong_password');
     await loginPage.verifyLoginFailed();
   });
