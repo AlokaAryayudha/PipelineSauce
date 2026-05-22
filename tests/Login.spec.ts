@@ -1,32 +1,23 @@
 import { test, expect } from '@playwright/test';
+import { LoginPage } from '../object/LoginPage';
 
 test.describe('SauceDemo Login', () => {
+  let loginPage: LoginPage;
 
-  test('Login berhasil dengan kredensial valid', async ({ page }) => {
-    // Buka halaman login
-    await page.goto('/');
-
-    // Isi username dan password
-    await page.fill('#user-name', 'standard_user');
-    await page.fill('#password', 'secret_sauce');
-
-    // Klik tombol login
-    await page.click('#login-button');
-
-    // Verifikasi berhasil login - halaman products muncul
-    await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
-    await expect(page.locator('.title')).toHaveText('Products');
+  // Dijalankan sebelum setiap test
+  test.beforeEach(async ({ page }) => {
+    loginPage = new LoginPage(page);
+    await loginPage.goto();
   });
 
-  test('Login gagal dengan password salah', async ({ page }) => {
-    await page.goto('/');
+  test('Login berhasil dengan kredensial valid', async () => {
+    await loginPage.login('standard_user', 'secret_sauce');
+    await loginPage.verifyLoginSuccess();
+  });
 
-    await page.fill('#user-name', 'standard_user');
-    await page.fill('#password', 'wrong_password');
-    await page.click('#login-button');
-
-    // Verifikasi muncul pesan error
-    await expect(page.locator('[data-test="error"]')).toBeVisible();
+  test('Login gagal dengan password salah', async () => {
+    await loginPage.login('standard_user', 'wrong_password');
+    await loginPage.verifyLoginFailed();
   });
 
 });
