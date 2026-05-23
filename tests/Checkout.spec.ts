@@ -53,7 +53,10 @@ test.describe('SauceDemo Checkout', () => {
     await inventoryPage.tambahProduk(inventoryPage.products.backpack);
     await inventoryPage.bukaKeranjang();
     await checkoutPage.checkout();
-    await checkoutPage.kembaliBerbelanja();
+    await checkoutPage.isiFormCheckout(CheckoutData.valid.firstName, CheckoutData.valid.lastName, CheckoutData.valid.postalCode);
+    await checkoutPage.lanjutkanCheckout();
+    await checkoutPage.selesaiCheckout();
+    await checkoutPage.kembaliKeHalamanUtama();
         console.log('Kembali berbelanja saat checkout');      
     });  
 
