@@ -16,7 +16,7 @@ test.describe('SauceDemo Checkout', () => {
     checkoutPage = new CheckoutPage(page);
     await loginPage.goto();
     await loginPage.login(UserData.validUser.username, UserData.validUser.password);
-      });
+    });
 
     test('Checkout dengan data valid', async () => {
     await inventoryPage.tambahProduk(inventoryPage.products.backpack);
@@ -24,11 +24,11 @@ test.describe('SauceDemo Checkout', () => {
     await checkoutPage.checkout();
     await checkoutPage.isiFormCheckout(CheckoutData.valid.firstName, CheckoutData.valid.lastName, CheckoutData.valid.postalCode);
     await checkoutPage.lanjutkanCheckout();
-    console.log('Checkout berhasil dengan data valid');
+        console.log('Checkout berhasil dengan data valid');
     await checkoutPage.selesaiCheckout();
     await expect(checkoutPage.page.locator('.complete-header')).toHaveText('Thank you for your order!');
     await checkoutPage.kembaliKeHalamanUtama();
-});
+    });
 
     test('Checkout dengan data tidak valid', async () => {
     await inventoryPage.tambahProduk(inventoryPage.products.backpack);
@@ -36,7 +36,35 @@ test.describe('SauceDemo Checkout', () => {
     await checkoutPage.checkout();
     await checkoutPage.isiFormCheckout(CheckoutData.invalid.firstName, CheckoutData.invalid.lastName, CheckoutData.invalid.postalCode);
     await checkoutPage.lanjutkanCheckout();
-    console.log('Checkout gagal dengan data tidak valid');      
+        console.log('Checkout gagal dengan data tidak valid');      
+    });
+
+    test('Batal checkout', async () => {
+    await inventoryPage.tambahProduk(inventoryPage.products.backpack);
+    await inventoryPage.bukaKeranjang();
+    await checkoutPage.checkout();
+    await checkoutPage.isiFormCheckout(CheckoutData.valid.firstName, CheckoutData.valid.lastName, CheckoutData.valid.postalCode);
+    await checkoutPage.lanjutkanCheckout();
+    await checkoutPage.batalkanCheckout();
+        console.log('Checkout dibatalkan');      
+    });
+
+    test('Kembali berbelanja saat checkout', async () => {
+    await inventoryPage.tambahProduk(inventoryPage.products.backpack);
+    await inventoryPage.bukaKeranjang();
+    await checkoutPage.checkout();
+    await checkoutPage.kembaliBerbelanja();
+        console.log('Kembali berbelanja saat checkout');      
+    });  
+
+    test('Batal checkout dan kembali ke halaman utama', async () => {
+    await inventoryPage.tambahProduk(inventoryPage.products.backpack);
+    await inventoryPage.bukaKeranjang();
+    await checkoutPage.checkout();
+    await checkoutPage.isiFormCheckout(CheckoutData.valid.firstName, CheckoutData.valid.lastName, CheckoutData.valid.postalCode);
+    await checkoutPage.lanjutkanCheckout();
+    await checkoutPage.batalkanCheckout();
+        console.log('Batal checkout dan kembali ke halaman utama');      
     });
     
         
