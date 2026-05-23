@@ -20,16 +20,17 @@ test.describe('SauceDemo Detail Produk', () => {
 
   test('Buka detail produk Backpack', async () => {
     await productPage.bukaDetailProduk('backpack');
-    // await expect(productPage.page.locator('.inventory_details_name')).toHaveText('Sauce Labs Backpack');
+    await expect(productPage.page.locator('.inventory_details_name')).toHaveText('Sauce Labs Backpack');
         console.log('Detail produk Backpack berhasil dibuka');
     await productPage.kembaliKeInventory()
         console.log('berhasil kembali ke inventory');
+    await productPage.page.pause()
 
   });   
 
   test('Buka detail produk Backpack dan memasukan kekeranjang', async () => {
     await productPage.bukaDetailProduk('backpack');
-    // await expect(productPage.page.locator('.inventory_details_name')).toHaveText('Sauce Labs Backpack');
+    await expect(productPage.page.locator('.inventory_details_name')).toHaveText('Sauce Labs Backpack');
         console.log('Detail produk Backpack berhasil dibuka');
     await productPage.tambahKeKeranjang();  
         console.log('Berhasil menambahkan produk ke keranjang');

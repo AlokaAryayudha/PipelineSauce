@@ -33,5 +33,6 @@ export class CheckoutPage {
     }
     async kembaliKeHalamanUtama() {
         await this.page.locator('[data-test="back-to-products"]').click();
+        await expect(this.page).toHaveURL('https://www.saucedemo.com/inventory.html');
     }
 }

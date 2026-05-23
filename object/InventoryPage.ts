@@ -36,6 +36,7 @@ export class InventoryPage {
 
   async bukaKeranjang(){
     await this.page.locator('.shopping_cart_link').click();
+    await expect(this.page).toHaveURL('https://www.saucedemo.com/cart.html');
   }
 
 

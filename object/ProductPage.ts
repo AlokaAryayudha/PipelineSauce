@@ -21,9 +21,16 @@ constructor(page: Page) {
 
   async kembaliKeInventory() {
     await this.page.locator('[data-test="back-to-products"]').click();
+    await expect(this.page).toHaveURL('https://www.saucedemo.com/inventory.html');
   }
   async tambahKeKeranjang() {
     await this.page.locator('[data-test="add-to-cart"]').click();
+    await expect(this.page.locator('[data-test="remove"]')).toBeVisible();
+  }
+  async Keranjang() {
+    await this.page.locator('.shopping_cart_link').click();
+    await expect(this.page).toHaveURL('https://www.saucedemo.com/cart.html');
+
   }
 
 }
