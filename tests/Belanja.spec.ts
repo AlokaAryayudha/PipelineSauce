@@ -25,7 +25,7 @@ test.describe('SauceDemo tambah keranjang', () => {
   test('Tambah 2 produk ke keranjang', async () => {
     await inventoryPage.tambahProduk(inventoryPage.products.backpack);   
     await inventoryPage.tambahProduk(inventoryPage.products.bikeLight);
-    console.log('2 Produk berhasil ditambahkan ke keranjang');    
+      console.log('2 Produk berhasil ditambahkan ke keranjang');    
   });
 
   test('Tambah semua produk ke keranjang', async () => {
@@ -35,7 +35,7 @@ test.describe('SauceDemo tambah keranjang', () => {
     await inventoryPage.tambahProduk(inventoryPage.products.fleeceJacket);
     await inventoryPage.tambahProduk(inventoryPage.products.onesie);
     await inventoryPage.tambahProduk(inventoryPage.products.redTShirt);
-    console.log('6 Produk berhasil ditambahkan ke keranjang');    
+      console.log('6 Produk berhasil ditambahkan ke keranjang');    
   });
 
 

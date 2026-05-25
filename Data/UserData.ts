@@ -12,32 +12,32 @@ export const CheckoutData = {
 };
 
 export const UserData = {
-    validUser: {
-    username: 'standard_user',
-    password: 'secret_sauce',
+  validUser: {
+    username: process.env.STANDARD_USER || 'standard_user',
+    password: process.env.PASSWORD || 'secret_sauce',
   },
   lockedUser: {
-    username: 'locked_out_user',
-    password: 'secret_sauce',
+    username: process.env.LOCKED_USER || 'locked_out_user',
+    password: process.env.PASSWORD || 'secret_sauce',
   },
   problemUser: {
-    username: 'problem_user',
-    password: 'secret_sauce',
+    username: process.env.PROBLEM_USER || 'problem_user',
+    password: process.env.PASSWORD || 'secret_sauce',
   },
   performanceUser: {
-    username: 'performance_glitch_user',
-    password: 'secret_sauce',
+    username: process.env.PERFORMANCE_USER || 'performance_glitch_user',
+    password: process.env.PASSWORD || 'secret_sauce',
   },
   errorUser: {
-    username: 'error_user',
-    password: 'secret_sauce',
+    username: process.env.ERROR_USER || 'error_user',
+    password: process.env.PASSWORD || 'secret_sauce',
   },
   visualUser: {
-    username: 'visual_user',
-    password: 'secret_sauce',
+    username: process.env.VISUAL_USER || 'visual_user',
+    password: process.env.PASSWORD || 'secret_sauce',
   },
   invalidUser: {
-    username: 'wrong_user',
-    password: 'wrong_password',
+    username: process.env.INVALID_USER || 'invalid_user',
+    password: process.env.PASSWORD || 'secret_sauce',
   },
 };
