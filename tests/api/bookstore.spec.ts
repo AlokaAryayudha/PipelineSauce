@@ -169,7 +169,7 @@ test('POST - Tambah buku ke koleksi user', async () => {
     console.log('Buku ditambahkan:', body.books[0].title);
 });
 
-test.only('DELETE - Hapus buku dari koleksi user yang sudah ada', async () => {
+test('DELETE - Hapus buku dari koleksi user yang sudah ada', async () => {
     const apiContext = await request.newContext();
 
     // Buat username unik
