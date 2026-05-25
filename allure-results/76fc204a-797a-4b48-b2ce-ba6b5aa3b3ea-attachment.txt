@@ -1,0 +1,2 @@
+Status: 200
+Response: {"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFsb2thdGVzdDEyMyIsInBhc3N3b3JkIjoiVGVzdEAxMjM0NSIsImlhdCI6MTc3OTcwMjUyMX0.N5NZcoCPA5WzfLBb3EJvAc-mx6wX_JpVKo47KkZnYMc","expires":"2026-06-01T09:48:41.307Z","status":"Success","result":"User authorized successfully."}
