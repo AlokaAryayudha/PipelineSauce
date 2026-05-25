@@ -25,6 +25,14 @@ pipeline {
     post {
         always {
             echo 'Pipeline selesai!'
+            allure([
+                includeProperties: false,
+                jdk: '',
+                properties: [],
+                reportBuildPolicy: 'ALWAYS',
+                results: [[path: 'allure-results']]
+            ])
+
             publishHTML([
                 allowMissing: false,
                 alwaysLinkToLastBuild: true,
