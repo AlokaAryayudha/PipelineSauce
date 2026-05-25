@@ -14,7 +14,10 @@ pipeline {
         }
         stage('Run Playwright Tests') {
             steps {
-                bat 'npx playwright test'
+                withCredentials([file(credentialsId: 'saucedemo-env', variable: 'ENV_FILE')]) {
+                    bat 'copy %ENV_FILE% .env'
+                    bat 'npx playwright test'
+                }
             }
         }
     }
@@ -22,7 +25,6 @@ pipeline {
     post {
         always {
             echo 'Pipeline selesai!'
-            // Publish HTML report
             publishHTML([
                 allowMissing: false,
                 alwaysLinkToLastBuild: true,
