@@ -11,16 +11,16 @@ test.describe('SauceDemo Login', () => {
     await loginPage.goto();
   });
 
-  test('Login berhasil dengan user valid', async () => {
+  test('Login berhasil dengan user valid @smoke', async () => {
     await loginPage.login(UserData.validUser.username, UserData.validUser.password);
     await loginPage.verifyLoginSuccess();
-    await loginPage.page.pause()
+    // await loginPage.page.pause()
     await loginPage.MenuAkun();
     await loginPage.Logout();
     console.log('Logout berhasil');
   });
 
-  test('Login gagal dengan user tanpa password', async () => {
+  test('Login gagal dengan user tanpa password @regression', async () => {
     await loginPage.login(UserData.validUser.username, '');
     await loginPage.verifyLoginFailed();
     console.log('User tanpa password, login gagal');
