@@ -69,6 +69,26 @@ test.describe('SauceDemo Checkout', () => {
     await checkoutPage.batalkanCheckout();
         console.log('Batal checkout dan kembali ke halaman utama');      
     });
+
+    test('Kembali berbelanja saat checkout dan kembali ke halaman utama', async () => {
+    await inventoryPage.tambahProduk(inventoryPage.products.backpack);
+    await inventoryPage.bukaKeranjang();
+    await checkoutPage.checkout();
+    await checkoutPage.isiFormCheckout(CheckoutData.valid.firstName, CheckoutData.valid.lastName, CheckoutData.valid.postalCode);
+    await checkoutPage.lanjutkanCheckout();
+    await checkoutPage.selesaiCheckout();
+    await checkoutPage.kembaliKeHalamanUtama();
+        console.log('Kembali berbelanja saat checkout dan kembali ke halaman utama');      
+    });
+    
+    test('Checkout dengan data kosong', async () => {
+    await inventoryPage.tambahProduk(inventoryPage.products.backpack);
+    await inventoryPage.bukaKeranjang();
+    await checkoutPage.checkout();
+    await checkoutPage.isiFormCheckout('', '', '');
+    await checkoutPage.lanjutkanCheckout();
+        console.log('Checkout gagal dengan data kosong');      
+    });
     
         
 
