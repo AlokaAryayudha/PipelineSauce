@@ -1,0 +1,5 @@
+Register: {"userID":"fbe1d32a-3899-46c2-937f-3d96d26b32e5","username":"aloka1780642991409","books":[]}
+UserId: fbe1d32a-3899-46c2-937f-3d96d26b32e5
+Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFsb2thMTc4MDY0Mjk5MTQwOSIsInBhc3N3b3JkIjoiVGVzdEAxMjM0NSIsImlhdCI6MTc4MDY0Mjk5M30.LGO8CHPpj6jvo3SRjm3HjlKKZEocbkQQcV3Q9USfLy8
+Response: {"books":[{"isbn":"9781449325862"}]}
+Buku ditambahkan: undefined

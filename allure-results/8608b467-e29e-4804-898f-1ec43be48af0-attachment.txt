@@ -1,0 +1,2 @@
+Status: 406
+Response: {"code":"1204","message":"User exists!"}

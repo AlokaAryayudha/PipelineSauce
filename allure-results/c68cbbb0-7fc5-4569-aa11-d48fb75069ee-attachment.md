@@ -1,0 +1,164 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: api\bookstore.spec.ts >> DemoQA - Bookstore API >> GET - Detail satu buku by ISBN
+- Location: tests\api\bookstore.spec.ts:31:5
+
+# Error details
+
+```
+Error: apiRequestContext.get: read ECONNRESET
+Call log:
+  - → GET https://demoqa.com/BookStore/v1/Book?ISBN=9781449325862
+    - user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.7778.96 Safari/537.36
+    - accept: */*
+    - accept-encoding: gzip,deflate,br
+
+```
+
+# Test source
+
+```ts
+  1   | import { test, expect, request } from '@playwright/test';
+  2   | 
+  3   | test.describe('DemoQA - Bookstore API', () => {
+  4   | 
+  5   |   test('GET - Verifikasi struktur semua field buku', async () => {
+  6   |     const apiContext = await request.newContext();
+  7   |     const response = await apiContext.get('https://demoqa.com/BookStore/v1/Books');
+  8   |     
+  9   |     expect(response.status()).toBe(200);
+  10  |     
+  11  |     const body = await response.json();
+  12  |     const firstBook = body.books[0];
+  13  | 
+  14  |     // Verifikasi semua field ada
+  15  |     expect(firstBook).toHaveProperty('isbn');
+  16  |     expect(firstBook).toHaveProperty('title');
+  17  |     expect(firstBook).toHaveProperty('subTitle');
+  18  |     expect(firstBook).toHaveProperty('author');
+  19  |     expect(firstBook).toHaveProperty('publisher');
+  20  |     expect(firstBook).toHaveProperty('pages');
+  21  |     expect(firstBook).toHaveProperty('description');
+  22  |     expect(firstBook).toHaveProperty('website');
+  23  | 
+  24  |     console.log('ISBN:', firstBook.isbn);
+  25  |     console.log('Judul:', firstBook.title);
+  26  |     console.log('Author:', firstBook.author);
+  27  |     console.log('Publisher:', firstBook.publisher);
+  28  |     console.log('Halaman:', firstBook.pages);
+  29  | });
+  30  | 
+  31  | test('GET - Detail satu buku by ISBN', async () => {
+  32  |     const apiContext = await request.newContext();
+  33  |     
+  34  |     const isbn = '9781449325862'; // Git Pocket Guide
+  35  |     
+> 36  |     const response = await apiContext.get(
+      |                                       ^ Error: apiRequestContext.get: read ECONNRESET
+  37  |         `https://demoqa.com/BookStore/v1/Book?ISBN=${isbn}`
+  38  |     );
+  39  | 
+  40  |     expect(response.status()).toBe(200);
+  41  | 
+  42  |     const body = await response.json();
+  43  |     console.log('Judul:', body.title);
+  44  |     console.log('Author:', body.author);
+  45  | 
+  46  |     expect(body.isbn).toBe(isbn);
+  47  |     expect(body.title).toBe('Git Pocket Guide');
+  48  | });
+  49  | 
+  50  | test('POST - Buat user baru', async () => {
+  51  |     const apiContext = await request.newContext();
+  52  | 
+  53  |     const response = await apiContext.post('https://demoqa.com/Account/v1/User', {
+  54  |         data: {
+  55  |             userName: 'alokatest123',
+  56  |             password: 'Test@12345'
+  57  |         }
+  58  |     });
+  59  | 
+  60  |     const body = await response.json();
+  61  |     console.log('Status:', response.status());
+  62  |     console.log('Response:', JSON.stringify(body));
+  63  | 
+  64  |     // 201 = user berhasil dibuat
+  65  |     // 406 = username sudah ada
+  66  |     expect([201, 406]).toContain(response.status());
+  67  | });
+  68  | 
+  69  | test('POST - Token login user', async () => {
+  70  |     const apiContext = await request.newContext();
+  71  |     const response = await apiContext.post('https://demoqa.com/Account/v1/GenerateToken', {
+  72  |         data: {
+  73  |             userName: 'alokatest123',
+  74  |             password: 'Test@12345'
+  75  |         }
+  76  |     });
+  77  |     expect(response.status()).toBe(200);
+  78  | 
+  79  |     const body = await response.json();
+  80  |     console.log('Token:', body.token);
+  81  |     console.log('Status:', body.status);
+  82  | 
+  83  |     expect(body.status).toBe('Success');
+  84  |     expect(body.token).not.toBeNull();
+  85  |     
+  86  | });
+  87  | 
+  88  | test('DELETE - Hapus buku dari koleksi user', async () => {
+  89  |     const apiContext = await request.newContext();
+  90  |     const loginResponse = await apiContext.post('https://demoqa.com/Account/v1/GenerateToken', {
+  91  |         data: {
+  92  |             userName: 'alokatest123',
+  93  |             password: 'Test@12345'
+  94  |         }
+  95  |     });
+  96  |     const loginBody = await loginResponse.json();
+  97  |     const token = loginBody.token;
+  98  |     console.log('Token:', token);
+  99  | 
+  100 |     const userResponse = await apiContext.get('https://demoqa.com/Account/v1/Authorized', {
+  101 |         headers: {
+  102 |             Authorization: `Bearer ${token}`
+  103 |         },
+  104 |         data: {
+  105 |             userName: 'alokatest123',
+  106 |             password: 'Test@12345'
+  107 |         }
+  108 |     })
+  109 | 
+  110 |     console.log('Authorized Status:', userResponse.status());
+  111 |     expect(userResponse.status()).toBe(200);
+  112 | 
+  113 |     const deleteResponse = await apiContext.delete(
+  114 |         'https://demoqa.com/BookStore/v1/Books?UserId=alokatest123', {
+  115 |         headers: {
+  116 |             Authorization: `Bearer ${token}`
+  117 |         }
+  118 |     });
+  119 | 
+  120 |     console.log('Delete status:', deleteResponse.status());
+  121 |     expect([204, 401]).toContain(deleteResponse.status());
+  122 | });
+  123 | 
+  124 | test('POST - Tambah buku ke koleksi user', async () => {
+  125 |     const apiContext = await request.newContext();
+  126 | 
+  127 |     // Username unik
+  128 |     const userName = `aloka${Date.now()}`;
+  129 | 
+  130 |     // Register 
+  131 |     const registerResponse = await apiContext.post('https://demoqa.com/Account/v1/User', {
+  132 |         data: {
+  133 |             userName: userName,
+  134 |             password: 'Test@12345'
+  135 |         }
+  136 |     });
+```

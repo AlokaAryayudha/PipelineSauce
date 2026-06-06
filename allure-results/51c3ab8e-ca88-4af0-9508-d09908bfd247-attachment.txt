@@ -1,0 +1,2 @@
+Judul: Git Pocket Guide
+Author: Richard E. Silverman

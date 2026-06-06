@@ -1,0 +1,5 @@
+ISBN: 9781449325862
+Judul: Git Pocket Guide
+Author: Richard E. Silverman
+Publisher: O'Reilly Media
+Halaman: 234

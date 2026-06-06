@@ -1,0 +1,3 @@
+Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFsb2thdGVzdDEyMyIsInBhc3N3b3JkIjoiVGVzdEAxMjM0NSIsImlhdCI6MTc4MDY0MzA1OH0.2RMe_CgP8t0erMphfkz9Ot-Qa5gsGhZoKpRGMcRraEg
+Authorized Status: 200
+Delete status: 401

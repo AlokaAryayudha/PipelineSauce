@@ -1,0 +1,3 @@
+Detail produk Backpack berhasil dibuka
+Berhasil menambahkan produk ke keranjang
+berhasil kembali ke inventory
