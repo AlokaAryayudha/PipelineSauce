@@ -74,6 +74,12 @@ test.describe('SauceDemo Login', () => {
     console.log('Berhasil login dengan user visual');
   }); 
 
+  test('Login dengan user visual 2 ', async () => {
+    await loginPage.login(UserData.visualUser.username, UserData.visualUser.password);
+    await loginPage.verifyLoginSuccess();
+    console.log('Berhasil login dengan user visual');
+  }); 
+
 
 
 
